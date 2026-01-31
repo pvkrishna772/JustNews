@@ -1,4 +1,3 @@
-const apiKey = "82ed9a3e75a44d9eb2085fd9990e075a";
 const searchInput = document.getElementById("searchInput");
 const searchBtn = document.getElementById("searchBtn");
 searchBtn.addEventListener("click",()=>{
@@ -29,9 +28,7 @@ categories.forEach(category=>{
     categoriesDiv.appendChild(btn);
 });
 function fetchTopHeadlines(){
-const topheadlinesUrl  = `https://newsapi.org/v2/top-headlines?country=us&apiKey=${apiKey}`;
-
-fetch(topheadlinesUrl, {cache: "no-cache"})
+fetch("/.netlify/functions/news", { cache: "no-cache" })
 
 .then(response=>response.json())
 .then(
@@ -82,8 +79,7 @@ fetch(topheadlinesUrl, {cache: "no-cache"})
         });
     }
     function fetchCategory(category){
-        const url = `https://newsapi.org/v2/everything?q=${category}&sortBy=publishedAt&apiKey=${apiKey}`;
-        fetch(url)
+       fetch(`/.netlify/functions/news?category=${category}`)
         .then(response=>response.json())
         .then(data=>
              displayArticles(data.articles))
@@ -91,8 +87,7 @@ fetch(topheadlinesUrl, {cache: "no-cache"})
                 console.log("error fetching news",error));
     }
     function fetchSearchNews(query){
-         const searchUrl = `https://newsapi.org/v2/everything?q=${query}&sortBy=publishedAt&apiKey=${apiKey}`;
-         fetch(searchUrl)
+         fetch(`/.netlify/functions/news?search=${encodeURIComponent(query)}`)
          .then(response=>response.json())
            .then(data=>{
                 displayArticles(data.articles);
