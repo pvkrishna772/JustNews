@@ -1,5 +1,5 @@
 export async function handler(event) {
-  const apiKey = process.env.NEWS_API_KEY;
+  const apiKey = process.env.apiKey;
   let url = `https://newsapi.org/v2/top-headlines?country=us&apiKey=${apiKey}`;
 
   const category = event.queryStringParameters?.category;
