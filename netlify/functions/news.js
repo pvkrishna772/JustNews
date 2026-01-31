@@ -1,16 +1,16 @@
 export async function handler(event) {
-  const API_KEY = process.env.NEWS_API_KEY;
-  let url = `https://newsapi.org/v2/top-headlines?country=us&apiKey=${API_KEY}`;
+  const apiKey = process.env.NEWS_API_KEY;
+  let url = `https://newsapi.org/v2/top-headlines?country=us&apiKey=${apiKey}`;
 
   const category = event.queryStringParameters?.category;
   const search = event.queryStringParameters?.search;
 
   if(category){
-    url = `https://newsapi.org/v2/everything?q=${category}&sortBy=publishedAt&apiKey=${API_KEY}`;
+    url = `https://newsapi.org/v2/everything?q=${category}&sortBy=publishedAt&apiKey=${apiKey}`;
   }
 
   if(search){
-    url = `https://newsapi.org/v2/everything?q=${encodeURIComponent(search)}&sortBy=publishedAt&apiKey=${API_KEY}`;
+    url = `https://newsapi.org/v2/everything?q=${encodeURIComponent(search)}&sortBy=publishedAt&apiKey=${apiKey}`;
   }
 
   try {
