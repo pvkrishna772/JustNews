@@ -55,6 +55,13 @@ fetch("/.netlify/functions/news", { cache: "no-cache" })
             const newsItem = document.createElement("div");
             newsItem.className = "news-item";
 
+            const urlToImage = article.urlToImage || "https://via.placeholder.com/150";
+            const image = document.createElement("img");
+            image.src = urlToImage;
+            image.alt = article.title;
+            image.className = "news-image";
+            newsItem.appendChild(image);
+
             const headline = document.createElement("h2");
             headline.innerText = article.title;
 
