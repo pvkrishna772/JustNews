@@ -58,12 +58,18 @@ fetch("/.netlify/functions/news", { cache: "no-cache" })
             const urlToImage = article.urlToImage || "https://via.placeholder.com/150";
             const image = document.createElement("img");
             image.src = urlToImage;
+            image.loading = "lazy";
             image.alt = article.title;
             image.className = "news-image";
             newsItem.appendChild(image);
 
             const headline = document.createElement("h2");
             headline.innerText = article.title;
+            headline.className = "news-headline";
+
+            const description = document.createElement("p");
+            description.innerText = article.description;
+            description.className = "news-description";
 
             const date = new Date(article.publishedAt);
             const formattedDate = date.toLocaleString()
@@ -78,8 +84,9 @@ fetch("/.netlify/functions/news", { cache: "no-cache" })
             readMore.innerText = `source: (${article.source.name}), read more...`;
             
             newsItem.appendChild(headline);
-            newsItem.appendChild(published);
+            newsItem.appendChild(description);
             newsItem.appendChild(readMore);
+            newsItem.appendChild(published);
         
             newsDiv.appendChild(newsItem);
            // newsDiv.appendChild(document.createElement("br"));
